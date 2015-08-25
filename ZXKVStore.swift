@@ -12,7 +12,10 @@ ZXKV["key"] = "value"
 let string = ZXKV["key"]  //string = value
 
 */
+
+
 import UIKit
+import FMDatabase
 
 let ZXKV = ZXKVStore.sharedStore
 
