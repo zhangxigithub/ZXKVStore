@@ -14,8 +14,8 @@ let string = ZXKV["key"]  //string = value
 */
 
 
-import UIKit
-import FMDB
+import Foundation
+import FMDatabase
 
 let ZXKV = ZXKVStore.sharedStore
 
