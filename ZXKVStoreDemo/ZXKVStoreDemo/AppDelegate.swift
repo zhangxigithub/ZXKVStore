@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZXKV["homepage"] = "https://github.com/zhangxigithub/ZXKVStore"
         println(ZXKV["homepage"]) //https://github.com/zhangxigithub/ZXKVStore
         
+
+        ZXKV["homepage"] = nil
+        println(ZXKV["homepage"]) //nil
         
         //store array
         
@@ -47,7 +50,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println(newObj?.name)
         
         
+        "dd".hasPrefix("")
+        "dd".hasSuffix("")
         
+        
+        //search with prefix
+        ZXKV["1001zx"] = "1"
+        ZXKV["1002zx"] = "2"
+        ZXKV["1003zx"] = "3"
+        ZXKV["1001ZX"] = "4"
+        ZXKV["1002ZX"] = "5"
+        ZXKV["1003ZX"] = "6"
+
+        println("ZXKV.prefix(\"100\")")
+        for s in ZXKV.prefix("100")
+        {
+            println(s)
+        }
+        
+        println("ZXKV.surfix(\"100\")")
+        for s in ZXKV.surfix("zx")
+        {
+            println(s)
+        }
+        
+
+        println("ZXKV.glob(\"*zx\")")
+        for s in ZXKV.glob("*zx")
+        {
+            println(s)
+        }
+        
+        println("ZXKV.like(\"%zx\")")
+        for s in ZXKV.like("%zx")
+        {
+            println(s)
+        }
         
         return true
     }

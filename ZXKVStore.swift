@@ -1,6 +1,6 @@
 //
 //  ZXKVStore.swift
-//  
+//
 //
 //  Created by zhangxi on 8/25/15.
 //
@@ -20,9 +20,9 @@ import Foundation
 let ZXKV = ZXKVStore.sharedStore
 
 class ZXKVStore: NSObject {
- 
+    
     let db:FMDatabase!
-
+    
     
     class var sharedStore: ZXKVStore {
         dispatch_once(&Inner.token) {
@@ -41,7 +41,6 @@ class ZXKVStore: NSObject {
         var filePath = path.stringByAppendingPathComponent("ZXKVStore.db")
         db = FMDatabase(path: filePath)
         
-
         
         if db.open() == false
         {
@@ -51,7 +50,7 @@ class ZXKVStore: NSObject {
             println("init   ZXKVStore db ....... ok")
         }
         
-
+        
         
         let creatTable = "CREATE TABLE IF NOT EXISTS ZXKVStore (id integer primary key autoincrement, k text,v blob);"
         if db.executeStatements(creatTable)
@@ -76,26 +75,67 @@ class ZXKVStore: NSObject {
     }
     
     
-    subscript(key: String) -> AnyObject?
-        {
-        get
-        {
-            return getObject(key)
-        }
-        set(obj)
-        {
-            saveObject(obj, key: key)
-        }
+    
+    func prefix(prefix:String) -> Array<AnyObject>
+    {
+        return glob("\(prefix)*")
     }
-
+    func surfix(surfix:String) -> Array<AnyObject>
+    {
+        return glob("*\(surfix)")
+    }
+    
+    func glob(s:String) -> Array<AnyObject>
+    {
+        var result = [AnyObject]()
+        
+        let sql = String(format:"select * from ZXKVStore where k GLOB '%@';", arguments: [s])
+        
+        let rs = db.executeQuery(sql, withArgumentsInArray: [])
+        
+        while rs.next()
+        {
+            let data: AnyObject? = rs.dataForColumn("v")
+            if data != nil
+            {
+                let obj: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data! as! NSData)
+                if obj != nil
+                {
+                    result.append(obj!)
+                }
+            }
+        }
+        return result
+    }
+    func like(s:String) -> Array<AnyObject>
+    {
+        var result = [AnyObject]()
+        
+        let sql = String(format:"select * from ZXKVStore where k LIKE '%@';", arguments: [s])
+        
+        let rs = db.executeQuery(sql, withArgumentsInArray: [])
+        
+        while rs.next()
+        {
+            let data: AnyObject? = rs.dataForColumn("v")
+            if data != nil
+            {
+                let obj: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data! as! NSData)
+                if obj != nil
+                {
+                    result.append(obj!)
+                }
+            }
+        }
+        return result
+    }
     
     
     func saveObject(obj:AnyObject?,key:String) -> Bool
     {
         if obj == nil
         {
-            println("obj is nil")
-            return false
+           return db.executeUpdate("delete from ZXKVStore where k = ?;", withArgumentsInArray: [key])
         }
         
         let rs = db.executeQuery("select * from ZXKVStore where k = ?;", withArgumentsInArray: [key])
@@ -104,7 +144,7 @@ class ZXKVStore: NSObject {
         
         if rs.next()
         {
-
+            
             if db.executeUpdate("update ZXKVStore set v = ? where k = ?", withArgumentsInArray: [data,key]) == true
             {
                 return true
@@ -136,7 +176,7 @@ class ZXKVStore: NSObject {
             {
                 let data: AnyObject? = rs.dataForColumn("v")
                 return NSKeyedUnarchiver.unarchiveObjectWithData(data! as! NSData)
-
+                
             }else
             {
                 return nil
@@ -149,5 +189,15 @@ class ZXKVStore: NSObject {
     }
     
     
-    
+    subscript(key: String) -> AnyObject?
+        {
+        get
+        {
+            return getObject(key)
+        }
+        set(obj)
+        {
+            saveObject(obj, key: key)
+        }
+    }
 }
