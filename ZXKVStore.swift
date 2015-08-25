@@ -15,7 +15,7 @@ let string = ZXKV["key"]  //string = value
 
 
 import Foundation
-import FMDatabase
+
 
 let ZXKV = ZXKVStore.sharedStore
 
@@ -48,15 +48,15 @@ class ZXKVStore: NSObject {
             println(db.lastErrorMessage())
         }else
         {
-            println("init ZXKVStore db....ok")
+            println("init   ZXKVStore db ....... ok")
         }
         
 
         
-        let creatTable = "create table ZXKVStore (id integer primary key autoincrement, k text,v blob);"
+        let creatTable = "CREATE TABLE IF NOT EXISTS ZXKVStore (id integer primary key autoincrement, k text,v blob);"
         if db.executeStatements(creatTable)
         {
-            println("init ZXKVStore table....ok")
+            println("init   ZXKVStore table .... ok")
         }else
         {
             println(db.lastErrorMessage())
@@ -66,9 +66,9 @@ class ZXKVStore: NSObject {
     
     func clean()
     {
-        if db.executeStatements("truncate table ZXKVStore;")
+        if db.executeStatements("delete from ZXKVStore;")
         {
-            println("truncate ....ok")
+            println("delete ZXKVStore .......... ok")
         }else
         {
             println(db.lastErrorMessage())
@@ -128,7 +128,7 @@ class ZXKVStore: NSObject {
     }
     func getObject(key:String) -> AnyObject?
     {
-        if let rs = db.executeQuery("select * from ZXKVStore where k = ?;", withArgumentsInArray: [key])
+        if let rs = db.executeQuery("select * from ZXKVStore where k = ? limit 1;", withArgumentsInArray: [key])
         {
             let result = rs.next()
             
@@ -139,13 +139,11 @@ class ZXKVStore: NSObject {
 
             }else
             {
-                println(db.lastErrorMessage())
                 return nil
             }
             
         }else
         {
-            println(db.lastErrorMessage())
             return nil
         }
     }

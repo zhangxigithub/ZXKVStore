@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		023A7714DE1811B1F6441C14 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7215B7ADDD8468D9C45329A /* libPods.a */; };
 		33F51FFB1B8C952500F631F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F51FFA1B8C952500F631F3 /* AppDelegate.swift */; };
-		33F51FFD1B8C952500F631F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F51FFC1B8C952500F631F3 /* ViewController.swift */; };
 		33F520001B8C952500F631F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F51FFE1B8C952500F631F3 /* Main.storyboard */; };
 		33F520021B8C952500F631F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33F520011B8C952500F631F3 /* Images.xcassets */; };
 		33F520051B8C952500F631F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33F520031B8C952500F631F3 /* LaunchScreen.xib */; };
 		33F520111B8C952500F631F3 /* ZXKVStoreDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F520101B8C952500F631F3 /* ZXKVStoreDemoTests.swift */; };
+		33F5201B1B8CAAB500F631F3 /* ZXKVStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F5201A1B8CAAB500F631F3 /* ZXKVStore.swift */; };
+		33F5201D1B8CABCD00F631F3 /* ZXKVStoreHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = 33F5201C1B8CAB2000F631F3 /* ZXKVStoreHeader.h */; };
+		33F520531B8CAF6100F631F3 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F520521B8CAF6100F631F3 /* Object.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +32,18 @@
 		33F51FF51B8C952500F631F3 /* ZXKVStoreDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXKVStoreDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F51FF91B8C952500F631F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F51FFA1B8C952500F631F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		33F51FFC1B8C952500F631F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		33F51FFF1B8C952500F631F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33F520011B8C952500F631F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33F520041B8C952500F631F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		33F5200A1B8C952500F631F3 /* ZXKVStoreDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZXKVStoreDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F5200F1B8C952500F631F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F520101B8C952500F631F3 /* ZXKVStoreDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZXKVStoreDemoTests.swift; sourceTree = "<group>"; };
+		33F5201A1B8CAAB500F631F3 /* ZXKVStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZXKVStore.swift; path = ../ZXKVStore.swift; sourceTree = "<group>"; };
+		33F5201C1B8CAB2000F631F3 /* ZXKVStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZXKVStoreHeader.h; path = ZXKVStoreDemo/ZXKVStoreHeader.h; sourceTree = "<group>"; };
+		33F520521B8CAF6100F631F3 /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		852A0D2C80CF2ED8AE4DE5D5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E7215B7ADDD8468D9C45329A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B5FCA76350089210EC48BF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023A7714DE1811B1F6441C14 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,9 +68,13 @@
 		33F51FEC1B8C952500F631F3 = {
 			isa = PBXGroup;
 			children = (
+				33F5201C1B8CAB2000F631F3 /* ZXKVStoreHeader.h */,
+				33F5201A1B8CAAB500F631F3 /* ZXKVStore.swift */,
 				33F51FF71B8C952500F631F3 /* ZXKVStoreDemo */,
 				33F5200D1B8C952500F631F3 /* ZXKVStoreDemoTests */,
 				33F51FF61B8C952500F631F3 /* Products */,
+				49263FEEF4F214C75376A54D /* Pods */,
+				8BC078ED31E827C6D7249FFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,11 +90,8 @@
 		33F51FF71B8C952500F631F3 /* ZXKVStoreDemo */ = {
 			isa = PBXGroup;
 			children = (
+				33F520521B8CAF6100F631F3 /* Object.swift */,
 				33F51FFA1B8C952500F631F3 /* AppDelegate.swift */,
-				33F51FFC1B8C952500F631F3 /* ViewController.swift */,
-				33F51FFE1B8C952500F631F3 /* Main.storyboard */,
-				33F520011B8C952500F631F3 /* Images.xcassets */,
-				33F520031B8C952500F631F3 /* LaunchScreen.xib */,
 				33F51FF81B8C952500F631F3 /* Supporting Files */,
 			);
 			path = ZXKVStoreDemo;
@@ -90,6 +100,9 @@
 		33F51FF81B8C952500F631F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				33F51FFE1B8C952500F631F3 /* Main.storyboard */,
+				33F520011B8C952500F631F3 /* Images.xcassets */,
+				33F520031B8C952500F631F3 /* LaunchScreen.xib */,
 				33F51FF91B8C952500F631F3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -112,6 +125,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		49263FEEF4F214C75376A54D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				852A0D2C80CF2ED8AE4DE5D5 /* Pods.debug.xcconfig */,
+				E8B5FCA76350089210EC48BF /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8BC078ED31E827C6D7249FFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7215B7ADDD8468D9C45329A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 33F520141B8C952500F631F3 /* Build configuration list for PBXNativeTarget "ZXKVStoreDemo" */;
 			buildPhases = (
+				41FB8E48D5F7F5530792A5DF /* Check Pods Manifest.lock */,
 				33F51FF11B8C952500F631F3 /* Sources */,
 				33F51FF21B8C952500F631F3 /* Frameworks */,
 				33F51FF31B8C952500F631F3 /* Resources */,
+				FC4D6262C4E7BB3630362EA4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,12 +239,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		41FB8E48D5F7F5530792A5DF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FC4D6262C4E7BB3630362EA4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		33F51FF11B8C952500F631F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33F51FFD1B8C952500F631F3 /* ViewController.swift in Sources */,
+				33F5201D1B8CABCD00F631F3 /* ZXKVStoreHeader.h in Sources */,
+				33F5201B1B8CAAB500F631F3 /* ZXKVStore.swift in Sources */,
+				33F520531B8CAF6100F631F3 /* Object.swift in Sources */,
 				33F51FFB1B8C952500F631F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,21 +405,27 @@
 		};
 		33F520151B8C952500F631F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 852A0D2C80CF2ED8AE4DE5D5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = ZXKVStoreDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ZXKVStoreDemo/ZXKVStoreHeader.h;
 			};
 			name = Debug;
 		};
 		33F520161B8C952500F631F3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8B5FCA76350089210EC48BF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = ZXKVStoreDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ZXKVStoreDemo/ZXKVStoreHeader.h;
 			};
 			name = Release;
 		};
@@ -409,6 +482,7 @@
 				33F520161B8C952500F631F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		33F520171B8C952500F631F3 /* Build configuration list for PBXNativeTarget "ZXKVStoreDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +491,7 @@
 				33F520191B8C952500F631F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
