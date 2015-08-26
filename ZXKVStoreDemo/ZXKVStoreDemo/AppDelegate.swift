@@ -87,6 +87,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println(s)
         }
         
+        
+        println(ZXKV.first())
+        println(ZXKV.last())
+        
         return true
     }
 

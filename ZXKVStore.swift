@@ -76,42 +76,49 @@ class ZXKVStore: NSObject {
     
     
     
-    func prefix(prefix:String) -> Array<AnyObject>
+    func prefix(prefix:String) -> Array<(key:String,value:AnyObject)>
     {
         return glob("\(prefix)*")
     }
-    func surfix(surfix:String) -> Array<AnyObject>
+    func surfix(surfix:String) -> Array<(key:String,value:AnyObject)>
     {
         return glob("*\(surfix)")
     }
-    
-    func glob(s:String) -> Array<AnyObject>
+    func first() -> (key:String,value:AnyObject)?
     {
-        var result = [AnyObject]()
-        
+        let sql = String(format:"select * from ZXKVStore order by id limit 1;", arguments: [])
+        let array = search(sql)
+        if array.count == 1
+        {
+            return array.first
+        }
+        return nil
+    }
+    func last() -> (key:String,value:AnyObject)?
+    {
+        let sql = String(format:"select * from ZXKVStore order by id desc limit 1;", arguments: [])
+        let array = search(sql)
+        if array.count == 1
+        {
+            return array.first
+        }
+        return nil
+    }
+    func glob(s:String) -> Array<(key:String,value:AnyObject)>
+    {
         let sql = String(format:"select * from ZXKVStore where k GLOB '%@';", arguments: [s])
-        
-        let rs = db.executeQuery(sql, withArgumentsInArray: [])
-        
-        while rs.next()
-        {
-            let data: AnyObject? = rs.dataForColumn("v")
-            if data != nil
-            {
-                let obj: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data! as! NSData)
-                if obj != nil
-                {
-                    result.append(obj!)
-                }
-            }
-        }
-        return result
+        return search(sql)
     }
-    func like(s:String) -> Array<AnyObject>
+    
+    func like(s:String) -> Array<(key:String,value:AnyObject)>
     {
-        var result = [AnyObject]()
-        
         let sql = String(format:"select * from ZXKVStore where k LIKE '%@';", arguments: [s])
+        return search(sql)
+    }
+    
+    func search(sql:String) -> Array<(key:String,value:AnyObject)>
+    {
+        var result:[(key:String,value:AnyObject)] = []
         
         let rs = db.executeQuery(sql, withArgumentsInArray: [])
         
@@ -123,12 +130,13 @@ class ZXKVStore: NSObject {
                 let obj: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data! as! NSData)
                 if obj != nil
                 {
-                    result.append(obj!)
+                    result.append((key:rs.stringForColumn("k")!,value:obj!))
                 }
             }
         }
         return result
     }
+    
     
     
     func saveObject(obj:AnyObject?,key:String) -> Bool
