@@ -19,6 +19,33 @@ import Foundation
 
 let ZXKV = ZXKVStore.sharedStore
 
+enum ZXKVType
+{
+    case KeyValue
+    case Counter
+    case Switch
+    
+    
+    func creatSQL() -> String
+    {
+        switch self
+        {
+        case .KeyValue: return "CREATE TABLE IF NOT EXISTS ZXKVStore (id integer primary key autoincrement, k text,v blob);"
+        case .Counter : return "CREATE TABLE IF NOT EXISTS ZXKVCounter (id integer primary key autoincrement, k text,v INTEGER);"
+        case .Switch  : return "CREATE TABLE IF NOT EXISTS ZXKVSwitch (id integer primary key autoincrement, k text,v INTEGER);"
+        }
+    }
+    func cleanSQL() -> String
+    {
+        switch self
+        {
+        case .KeyValue: return "delete from ZXKVStore;"
+        case .Counter : return "delete from ZXKVCounter;"
+        case .Switch  : return "delete from ZXKVSwitch;"
+        }
+    }
+}
+
 class ZXKVStore: NSObject {
     
     let db:FMDatabase!
@@ -51,23 +78,23 @@ class ZXKVStore: NSObject {
         }
         
         
-        
-        let creatTable = "CREATE TABLE IF NOT EXISTS ZXKVStore (id integer primary key autoincrement, k text,v blob);"
-        if db.executeStatements(creatTable)
+        for item in [ZXKVType.KeyValue,ZXKVType.Counter,ZXKVType.Switch]
         {
-            println("init   ZXKVStore table .... ok")
-        }else
-        {
-            println(db.lastErrorMessage())
+            if db.executeStatements(item.creatSQL())
+            {
+                println("\(item.creatSQL()).... ok")
+            }else
+            {
+                println(db.lastErrorMessage())
+            }
         }
-        
     }
     
-    func clean()
+    func clean(type:ZXKVType = ZXKVType.KeyValue)
     {
-        if db.executeStatements("delete from ZXKVStore;")
+        if db.executeStatements(type.cleanSQL())
         {
-            println("delete ZXKVStore .......... ok")
+            println("\(type.cleanSQL()) .......... ok")
         }else
         {
             println(db.lastErrorMessage())
@@ -75,7 +102,7 @@ class ZXKVStore: NSObject {
     }
     
     
-    
+    //MARK: - Key-value store
     func prefix(prefix:String) -> Array<(key:String,value:AnyObject)>
     {
         return glob("\(prefix)*")
@@ -152,7 +179,6 @@ class ZXKVStore: NSObject {
         
         if rs.next()
         {
-            
             if db.executeUpdate("update ZXKVStore set v = ? where k = ?", withArgumentsInArray: [data,key]) == true
             {
                 return true
@@ -207,5 +233,145 @@ class ZXKVStore: NSObject {
         {
             saveObject(obj, key: key)
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: - counter
+    func count(key:String) -> Int
+    {
+        let k = "ZXKVCounter.\(key)"
+        if let rs = db.executeQuery("select * from ZXKVCounter where k = ? limit 1;", withArgumentsInArray: [k])
+        {
+            let result = rs.next()
+            
+            if result == true
+            {
+                return Int(rs.intForColumn("v"))
+            }else
+            {
+                return 0
+            }
+            
+        }else
+        {
+            return 0
+        }
+    }
+    func setCount(key:String,value:Int) -> Bool
+    {
+        let k = "ZXKVCounter.\(key)"
+        
+        let rs = db.executeQuery("select * from ZXKVCounter where k = ?;", withArgumentsInArray: [k])
+        
+        if rs.next()
+        {
+            if db.executeUpdate("update ZXKVCounter set v = ? where k = ?", withArgumentsInArray: [value,k]) == true
+            {
+                return true
+            }else
+            {
+                println("store ....fail",db.lastErrorMessage())
+                return false
+            }
+            
+        }else
+        {
+            if db.executeUpdate("insert into ZXKVCounter (k,v) values (?,?)", withArgumentsInArray: [k,value]) == true
+            {
+                return true
+            }else
+            {
+                println("store ....fail",db.lastErrorMessage())
+                return false
+            }
+        }
+    }
+    
+    func increase(key:String) -> Int
+    {
+        var v = count(key)
+        v++
+        setCount(key, value: v)
+        return v
+    }
+    func decrease(key:String) -> Int
+    {
+        var v = count(key)
+        v--
+        setCount(key, value: v)
+        return v
+    }
+    
+    
+    
+    //MARK: - switch
+    
+    func switchState(key:String) -> Bool?
+    {
+        let k = "ZXKVSwitch.\(key)"
+        if let rs = db.executeQuery("select * from ZXKVSwitch where k = ? limit 1;", withArgumentsInArray: [k])
+        {
+            let result = rs.next()
+            
+            if result == true
+            {
+                return Bool(rs.boolForColumn("v"))
+            }else
+            {
+                return nil
+            }
+        }else
+        {
+            return nil
+        }
+    }
+    func setSwitchState(key:String,value:Bool?) -> Bool
+    {
+        let k = "ZXKVSwitch.\(key)"
+        
+        if value == nil
+        {
+            return db.executeUpdate("delete from ZXKVSwitch where k = ?;", withArgumentsInArray: [key])
+        }
+        
+        
+        let rs = db.executeQuery("select * from ZXKVSwitch where k = ?;", withArgumentsInArray: [k])
+        
+        if rs.next()
+        {
+            if db.executeUpdate("update ZXKVSwitch set v = ? where k = ?", withArgumentsInArray: [value!,k]) == true
+            {
+                return true
+            }else
+            {
+                println("store ....fail",db.lastErrorMessage())
+                return false
+            }
+            
+        }else
+        {
+            if db.executeUpdate("insert into ZXKVSwitch (k,v) values (?,?)", withArgumentsInArray: [k,value!]) == true
+            {
+                return true
+            }else
+            {
+                println("store ....fail",db.lastErrorMessage())
+                return false
+            }
+        }
+    }
+    func switchOn(key:String) -> Bool
+    {
+       return setSwitchState(key, value: true)
+    }
+    func switchOff(key:String) -> Bool
+    {
+        return setSwitchState(key, value: false)
     }
 }

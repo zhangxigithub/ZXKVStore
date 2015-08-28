@@ -91,6 +91,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println(ZXKV.first())
         println(ZXKV.last())
         
+        
+        println("Counter ======================")
+        println(ZXKV.count("zhangxi"))
+        println(ZXKV.increase("zhangxi"))
+        ZXKV.setCount("zhangxi", value: 10)
+        println(ZXKV.count("zhangxi"))
+        println(ZXKV.decrease("zhangxi"))
+        println(ZXKV.count("zhangxi"))
+        
+        
+        
+        println("Switch======================")
+        println(ZXKV.switchState("zhangxi"))
+        println(ZXKV.setSwitchState("zhangxi", value: true))
+        println(ZXKV.switchState("zhangxi"))
+        
+        
+        println(ZXKV.switchOn("zhangxi"))
+        println(ZXKV.switchState("zhangxi"))
+        println(ZXKV.switchOff("zhangxi"))
+        println(ZXKV.switchState("zhangxi"))
+        println(ZXKV.setSwitchState("zhangxi", value: true))
+        println(ZXKV.switchState("zhangxi"))
+
+        
         return true
     }
 
