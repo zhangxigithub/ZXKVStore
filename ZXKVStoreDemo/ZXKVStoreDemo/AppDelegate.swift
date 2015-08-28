@@ -26,6 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         ZXKV["homepage"] = "http://www.zhangxi.me"
         println(ZXKV["homepage"]) //http://www.zhangxi.me
+
+        ZXKV["homepage"] = 5
+        println(ZXKV["homepage"]) //5
+        
+        ZXKV["homepage"] = true
+        println((ZXKV["homepage"] as! NSNumber).boolValue) //true
+        
+        ZXKV["homepage"] = false
+        println((ZXKV["homepage"] as! NSNumber).boolValue) //false
         
         
         ZXKV["homepage"] = "https://github.com/zhangxigithub/ZXKVStore"
