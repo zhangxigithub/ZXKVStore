@@ -97,11 +97,11 @@ If you're starting a new project in Swift, and just use swift in your old projec
 
 
 
-### When should I use AFNetworking?
+### When should I use ZXKVStore?
 
 When you want to store data.
 
-### What's the origin of the name Alamofire?
+### What's the origin of the name ZXKVStore?
 
 ZXKVStore mean ZhangXi Key-value store.I'm zhangxi.
 
@@ -110,4 +110,4 @@ ZXKVStore mean ZhangXi Key-value store.I'm zhangxi.
 
 ## License
 
-Alamofire is released under the MIT license. See LICENSE for details.
+ZXKVStore is released under the MIT license. See LICENSE for details.
